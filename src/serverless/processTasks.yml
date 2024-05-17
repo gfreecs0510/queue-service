@@ -1,0 +1,8 @@
+processTasks:
+  handler: src/handlers/processTasks.handler
+  events:
+    - sqs:
+        arn: 
+          Fn::GetAtt: [TasksQueue, Arn]
+#TODO: i need a permission for the following
+#read and write in dynamodb

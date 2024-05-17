@@ -1,0 +1,27 @@
+{
+  "name": "queue-service",
+  "version": "1.0.0",
+  "description": "a queuing mechanism written in node",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gfreecs0510/queue-service.git"
+  },
+  "keywords": [
+    "queue",
+    "node",
+    "lamba",
+    "aws",
+    "electrodb",
+    "dynamodb",
+    "sqs"
+  ],
+  "author": "AL Lara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gfreecs0510/queue-service/issues"
+  },
+  "homepage": "https://github.com/gfreecs0510/queue-service#readme"
+}

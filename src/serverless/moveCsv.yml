@@ -1,0 +1,7 @@
+moveCsv:
+  handler: src/handlers/moveCsv.handler
+
+#TODO: the event is that when the job was updated, and the tasks are all added on the queue, we can now move the csv to another directory
+#TODO: permission to
+#update dynamodb
+#s3 write, so we will move the uploaded csv to a directory called "parsed"

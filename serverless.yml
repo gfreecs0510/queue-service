@@ -1,0 +1,33 @@
+service: queue-service
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+resources:
+    - ${file(infra.yml)}
+
+functions:
+  - ${file(src/serverless/createJob.yml)}
+  - ${file(src/serverless/getJob.yml)}
+  - ${file(src/serverless/processTasks.yml)}
+
+#TODO: I think i can directly reference the resources arns on the functions
+#outputs are not needed i think, need to test next week
+outputs:
+  QueueTableArn:
+    Value:
+      Fn::GetAtt:
+        - QueueTable
+        - Arn
+  TasksQueueArn:
+    Value:
+      Fn::GetAtt:
+        - TasksQueue
+        - Arn
+  CsvDirectoryArn:
+    Value:
+      Fn::GetAtt:
+        - CsvDirectory
+        - Arn

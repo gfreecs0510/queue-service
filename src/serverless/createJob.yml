@@ -1,0 +1,9 @@
+createJob:
+  handler: src/handlers/createJob.handler
+  events:
+    - httpApi:
+        path: /jobs/create
+        method: post
+# TODO: i need a permission here that will allow the following:
+# create a presigned upload url for the csv
+# dynamodb put

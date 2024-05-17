@@ -1,0 +1,8 @@
+getJob:
+  handler: src/handlers/getJob.handler
+  events:
+    - httpApi:
+        path: /jobs/{id}/{page_token}
+        method: get
+#TODO: i need a permission here to allow
+#dynamodb read

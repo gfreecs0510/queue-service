@@ -1,0 +1,178 @@
+openapi: 3.0.0
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://awstest.com/gfreecs0510/queue-service/1.0.0
+info:
+  description: Queue Service API
+  version: "1.0.0"
+  title: Simple Queue Service API
+  contact:
+    email: gfreecs0510@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /jobs/create:
+    post:
+      summary: create job
+      description: use this API to create a job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequestBody'
+      responses:
+        '200':
+          description: job created successfuly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateJobResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /jobs/{id}/{page_token}:
+    get:
+      summary: get job details via id
+      description: use this API to get the job details plus the tasks via id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: page_token
+          in: path
+          required: false
+          schema:
+            type: string
+          description: page token, to paginate Tasks. if blank, it will retrieve the first 100
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJob'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateJobRequestBody:
+      type: object
+      properties:
+        csv_filename:
+          type: string
+          description: name of the csv file
+          example: for_create.csv
+        row_count:
+          type: number
+          description: the number of rows in csv, use to determine when the loop will end
+          example: 100
+    CreateJobResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the job.
+          example: ABC123
+        s3_url:
+          type: string
+          description: url to upload the csv
+          example: https://aws-123.com
+        created_at:
+          type: string
+          example: 2024-01-01 00:00:00
+        updated_at:
+          type: string
+          example: 2024-01-01 00:00:00
+        created_by:
+          type: string
+          example: gfreecs0510@gmail.com
+        updated_by:
+          type: string
+          example: gfreecs0510@gmail.com
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the job.
+          example: ABC123
+        csv_filename:
+          type: string
+          example: for_create.csv
+        created_at:
+          type: string
+          example: 2024-01-01 00:00:00
+        updated_at:
+          type: string
+          example: 2024-01-01 00:00:00
+        created_by:
+          type: string
+          example: gfreecs0510@gmail.com
+        updated_by:
+          type: string
+          example: gfreecs0510@gmail.com
+        total_task:
+          type: number
+          example: 100
+        total_task_in_queue:
+          type: number
+          example: 50
+        total_successful_task:
+          type: number
+          example: 40
+        total_failed_task:
+          type: number
+          example: 10
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ABC123
+        record_id:
+          type: string
+          example: FE00001
+        body:
+          type: string
+          example: {abc123}
+        status:
+          type: string
+          example: pass
+        created_at:
+          type: string
+          example: 2024-01-01 00:00:00
+        updated_at:
+          type: string
+          example: 2024-01-01 00:00:00
+    GetJob:
+      type: object
+      properties:
+        job:
+          type: object
+          $ref: '#/components/schemas/Job'
+        tasks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        page_token:
+          type: string
+          description: only available to retrieve the next 100 tasks
+          example: ABC123
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error has occured
+          example: Error has occured

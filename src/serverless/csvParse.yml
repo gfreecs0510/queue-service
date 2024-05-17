@@ -1,0 +1,12 @@
+csvParse:
+  handler: src/handlers/csvParse.handler
+  events:
+    - s3:
+        bucket: 
+          Fn::GetAtt: [CsvDirectory, Arn]
+        event: s3:ObjectCreated:*
+        rules:
+          - prefix: uploaded/
+            suffix: .csv
+#TODO: i need permission here to
+#allow dynamodb create and read

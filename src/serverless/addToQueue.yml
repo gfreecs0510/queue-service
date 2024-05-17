@@ -1,0 +1,7 @@
+addToQueue:
+  handler: src/handlers/addToQueue.handler
+
+#TODO: the event is that when there are new tasks added on dynamodb, we need to included them on the queue
+#TODO: i need permission to 
+#listen to dynamodb
+#create and read in dynamodb
