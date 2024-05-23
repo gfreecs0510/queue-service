@@ -23,5 +23,14 @@
   "bugs": {
     "url": "https://github.com/gfreecs0510/queue-service/issues"
   },
-  "homepage": "https://github.com/gfreecs0510/queue-service#readme"
+  "homepage": "https://github.com/gfreecs0510/queue-service#readme",
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610",
+  "dependencies": {
+    "aws-sdk": "^2.1626.0",
+    "electrodb": "^2.14.1",
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "jest-dynalite": "^3.6.1"
+  }
 }
