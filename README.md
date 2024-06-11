@@ -3,6 +3,10 @@
 A lambda based simple queuing mechanism, written in node.
 aws resources managed and deployed via serverless
 
+# Workflow
+see chart
+https://lucid.app/lucidchart/b8179612-7fad-4e51-9400-d1dd5e09ad5b/edit?beaconFlowId=7022F14884F09878&invitationId=inv_26589ed7-6ce0-4791-bbb2-c45a8798a69c&page=0_0#
+
 # Endpoints
 
 see swagger.yaml
