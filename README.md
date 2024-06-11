@@ -9,7 +9,12 @@ https://lucid.app/lucidchart/b8179612-7fad-4e51-9400-d1dd5e09ad5b/edit?beaconFlo
 
 # Endpoints
 
-see swagger.yaml
+see openapi.yaml
+
+# Types
+
+any schema updates to openapi.yaml, types must be updated as well
+run `npx openapi-typescript ./openapi.yml -o ./types/openapi.ts`
 
 # AWS Resources use
 
