@@ -35,6 +35,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /jobs/{page_token}:
+    get:
+      summary: get the latest jobs
+      description: get the latest jobs, returns with page token
+      parameters:
+        - name: page_token
+          in: path
+          required: true
+          schema:
+            type: string
+          description: page token, to paginate jobs. if blank, it will retrieve the first 100
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetJobs'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /jobs/{id}/{page_token}:
     get:
       summary: get job details via id
@@ -47,7 +71,7 @@ paths:
             type: string
         - name: page_token
           in: path
-          required: false
+          required: true
           schema:
             type: string
           description: page token, to paginate Tasks. if blank, it will retrieve the first 100
@@ -69,13 +93,13 @@ components:
     CreateJobRequestBody:
       type: object
       properties:
-        csv_filename:
+        json_filename:
           type: string
-          description: name of the csv file
-          example: for_create.csv
+          description: name of the json file
+          example: for_create.json
         row_count:
           type: number
-          description: the number of rows in csv, use to determine when the loop will end
+          description: the number of rows in json, use to determine when the loop will end
           example: 100
     CreateJobResponse:
       type: object
@@ -86,7 +110,7 @@ components:
           example: ABC123
         s3_url:
           type: string
-          description: url to upload the csv
+          description: url to upload the json
           example: https://aws-123.com
         created_at:
           type: string
@@ -107,9 +131,9 @@ components:
           type: string
           description: The unique identifier of the job.
           example: ABC123
-        csv_filename:
+        json_filename:
           type: string
-          example: for_create.csv
+          example: for_create.json
         created_at:
           type: string
           example: 2024-01-01 00:00:00
@@ -125,9 +149,6 @@ components:
         total_task:
           type: number
           example: 100
-        total_task_in_queue:
-          type: number
-          example: 50
         total_successful_task:
           type: number
           example: 40
@@ -143,9 +164,6 @@ components:
         record_id:
           type: string
           example: FE00001
-        body:
-          type: string
-          example: {abc123}
         status:
           type: string
           example: pass
@@ -165,6 +183,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Task'
+        page_token:
+          type: string
+          description: only available to retrieve the next 100 tasks
+          example: ABC123
+    GetJobs:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
         page_token:
           type: string
           description: only available to retrieve the next 100 tasks
